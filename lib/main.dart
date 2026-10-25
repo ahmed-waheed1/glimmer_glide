@@ -1,23 +1,13 @@
-import 'package:flame/components.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/widgets.dart';
 
-void main() {
-  runApp(GameWidget(game: SmokeTestGame()));
-}
+import 'game/glimmer_game.dart';
 
-class SmokeTestGame extends FlameGame {
-  @override
-  Color backgroundColor() => const Color(0xFF1B1F3B);
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Flame.device.fullScreen();
+  await Flame.device.setPortrait();
 
-  @override
-  Future<void> onLoad() async {
-    add(
-      TextComponent(
-        text: 'Flame is running!',
-        position: size / 2,
-        anchor: Anchor.center,
-      ),
-    );
-  }
+  runApp(GameWidget(game: GlimmerGame()));
 }
